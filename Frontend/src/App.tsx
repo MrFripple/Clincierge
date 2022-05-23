@@ -1,15 +1,30 @@
-import React from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './App.css';
+import GlobalContext from './context /Global';
+import axios from 'axios';
+
+
+
+
 
 function App() {
+  const [foodImages, setFoodImages] = useState('default');
+
+
+  useEffect( () => {
+    axios.get('/api')
+    .then(({data}) => {
+      setFoodImages(data.image)
+    })
+    }
+  ,[]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-         food list stub
-        </p>
-      </header>
-    </div>
+    <GlobalContext.Provider value={{}}>
+      <img src = {foodImages} alt="default"></img>
+    {/* <FoodList />
+    <button onClick = >Refresh</button> */}
+    </GlobalContext.Provider>
   );
 }
 
