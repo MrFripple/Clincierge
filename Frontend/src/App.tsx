@@ -6,12 +6,7 @@ import axios from 'axios';
 
 function App() {
   const [foodImages, setFoodImages] = useState<string[]>([]);
-
-
-  useEffect( () => 
-    addImage()
-  ,[]);
-
+  
   const addImage = () => {
     axios.get('/api')
     .then(({data}) => {
@@ -19,6 +14,9 @@ function App() {
     })
   }
 
+  useEffect( () => 
+    addImage()
+  ,[]);
   return (
     <GlobalContext.Provider value={{foodImages, setFoodImages}}>
       <h1>Food Images</h1>
